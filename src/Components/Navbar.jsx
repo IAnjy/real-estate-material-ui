@@ -2,11 +2,11 @@ import * as React from 'react'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import MenuIcon from '@mui/icons-material/Menu'
-import FeaturedPlayListIcon from '@mui/icons-material/FeaturedPlayList'
-import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices'
-import ListAltIcon from '@mui/icons-material/ListAlt'
-import HomeIcon from '@mui/icons-material/Home'
-import ContactsIcon from '@mui/icons-material/Contacts'
+import FeaturedPlayList from '@mui/icons-material/FeaturedPlayList'
+import MiscellaneousServices from '@mui/icons-material/MiscellaneousServices'
+import ListAlt from '@mui/icons-material/ListAlt'
+import Home from '@mui/icons-material/Home'
+import Contacts from '@mui/icons-material/Contacts'
 import logoImg from '../media/logo.png'
 import { Container } from '@mui/system'
 import CustomButton from './CustomButton'
@@ -22,6 +22,41 @@ import {
 import { useState } from 'react'
 
 export const Navbar = () => {
+  const [mobileMenu, setMobileMenu] = useState({ left: false })
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event.type === 'keydown' &&
+      (event.type === 'Tab' || event.type === 'Shift')
+    ) {
+      return
+    }
+    setMobileMenu({ ...mobileMenu, [anchor]: open })
+  }
+
+  const list = (anchor) => (
+    <Box sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}>
+      <List>
+        {['Home', 'Features', 'Services', 'Listed', 'Contact'].map(
+          (text, index) => (
+            <ListItem key={text} disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  {index === 0 && <Home />}
+                  {index === 1 && <FeaturedPlayList />}
+                  {index === 2 && <MiscellaneousServices />}
+                  {index === 3 && <ListAlt />}
+                  {index === 4 && <Contacts />}
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          ),
+        )}
+      </List>
+    </Box>
+  )
+
   const NavLink = styled(Typography)(({ theme }) => ({
     fontSize: '14px',
     color: '#4FS361',
@@ -79,7 +114,14 @@ export const Navbar = () => {
         }}
       >
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <CustomMenuIcon />
+          <CustomMenuIcon onClick={toggleDrawer('left', true)} />
+          <Drawer
+            anchor="left"
+            open={mobileMenu['left']}
+            onClose={toggleDrawer('left', false)}
+          >
+            {list('left')}
+          </Drawer>
           <NavbarLogo src={logoImg} alt="logo" />
         </Box>
         <NavbarLinksBox>

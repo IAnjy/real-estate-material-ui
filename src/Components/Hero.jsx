@@ -1,9 +1,26 @@
-import { Box, Button, Container, styled, Typography } from '@mui/material'
+import {
+  Box,
+  Button,
+  Container,
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  styled,
+  Typography,
+} from '@mui/material'
 import React from 'react'
 import Navbar from './Navbar'
 
 import heroImg from '../media/hero_illustration.png'
 import CustomButton from './CustomButton'
+import {
+  Contacts,
+  FeaturedPlayList,
+  Home,
+  ListAlt,
+  MiscellaneousServices,
+} from '@mui/icons-material'
 
 const Hero = () => {
   const CustomBox = styled(Box)(({ theme }) => ({
@@ -11,7 +28,7 @@ const Hero = () => {
     justifyContent: 'center',
     gap: theme.spacing(5),
     marginTop: theme.spacing(3),
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       flexDirection: 'column',
       alignItems: 'center',
       textAlign: 'center',
