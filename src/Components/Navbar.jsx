@@ -1,15 +1,15 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import MenuIcon from "@mui/icons-material/Menu";
-import FeaturedPlayListIcon from "@mui/icons-material/FeaturedPlayList";
-import MiscellaneousServicesIcon from "@mui/icons-material/MiscellaneousServices";
-import ListAltIcon from "@mui/icons-material/ListAlt";
-import HomeIcon from "@mui/icons-material/Home";
-import ContactsIcon from "@mui/icons-material/Contacts";
-import logoImg from "../media/logo.png";
-import { Container } from "@mui/system";
-import CustomButton from "./CustomButton";
+import * as React from 'react'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import MenuIcon from '@mui/icons-material/Menu'
+import FeaturedPlayListIcon from '@mui/icons-material/FeaturedPlayList'
+import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices'
+import ListAltIcon from '@mui/icons-material/ListAlt'
+import HomeIcon from '@mui/icons-material/Home'
+import ContactsIcon from '@mui/icons-material/Contacts'
+import logoImg from '../media/logo.png'
+import { Container } from '@mui/system'
+import CustomButton from './CustomButton'
 import {
   Drawer,
   List,
@@ -18,21 +18,95 @@ import {
   ListItemIcon,
   ListItemText,
   styled,
-} from "@mui/material";
-import { useState } from "react";
+} from '@mui/material'
+import { useState } from 'react'
 
 export const Navbar = () => {
-  const NavLink = styled(Typography)(({ theme }) => ({}));
+  const NavLink = styled(Typography)(({ theme }) => ({
+    fontSize: '14px',
+    color: '#4FS361',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    '&:hover': {
+      color: '#fff',
+    },
+  }))
 
-  const NavbarLinksBox = styled(Box)(({ theme }) => ({}));
+  const NavbarLinksBox = styled(Box)(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: theme.spacing(3),
+    [theme.breakpoints.down('md')]: {
+      display: 'none',
+    },
+  }))
 
-  const CustomMenuIcon = styled(MenuIcon)(({ theme }) => ({}));
+  const CustomMenuIcon = styled(MenuIcon)(({ theme }) => ({
+    cursor: 'pointer',
+    display: 'none',
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.down('md')]: {
+      display: 'block',
+    },
+  }))
 
-  const NavbarContainer = styled(Container)(({ theme }) => ({}));
+  const NavbarContainer = styled(Container)(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: theme.spacing(5),
+    [theme.breakpoints.down('md')]: {
+      padding: theme.spacing(2),
+    },
+  }))
 
-  const NavbarLogo = styled("img")(({ theme }) => ({}));
+  const NavbarLogo = styled('img')(({ theme }) => ({
+    cursor: 'pointer',
+    [theme.breakpoints.down('md')]: {
+      display: 'none',
+    },
+  }))
 
-  return <></>;
-};
+  return (
+    <NavbarContainer>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '2.5rem',
+        }}
+      >
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <CustomMenuIcon />
+          <NavbarLogo src={logoImg} alt="logo" />
+        </Box>
+        <NavbarLinksBox>
+          <NavLink variant="body2">Home</NavLink>
+          <NavLink variant="body2">Features</NavLink>
+          <NavLink variant="body2">Services</NavLink>
+          <NavLink variant="body2">Listed</NavLink>
+          <NavLink variant="body2">Contact</NavLink>
+        </NavbarLinksBox>
+      </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '1rem',
+        }}
+      >
+        <NavLink variant="body2">Sign Up</NavLink>
+        <CustomButton
+          backgroundColor="#0F184C"
+          color="#fff"
+          buttonText="Resister"
+        />
+      </Box>
+    </NavbarContainer>
+  )
+}
 
-export default Navbar;
+export default Navbar
